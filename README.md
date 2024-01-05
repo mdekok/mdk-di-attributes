@@ -1,13 +1,15 @@
 [![Build](https://github.com/mdekok/mdk-di-attributes/actions/workflows/Build.yml/badge.svg)](https://github.com/mdekok/mdk-di-attributes/actions/workflows/Build.yml)
 [![Build, pack and publish](https://github.com/mdekok/mdk-di-attributes/actions/workflows/BuildPackPublish.yml/badge.svg)](https://github.com/mdekok/mdk-di-aIAttributes/actions/workflows/BuildPackPublish.yml)
+![Nuget](https://img.shields.io/nuget/v/Mdk.DIAttributes)
+
 
 # Summary
 The DIAttributes package is designed to help clean up your service registration code when using the default Dependency Injection (DI) container in .NET. It allows you to use custom attributes to register your services, keeping the DI metadata close to the implementation classes.
-The package includes a reflection-based strategy to register services using these attributes. However, if you prefer a source generator strategy, you can use the [Mdk.DISourceGenerator](https://github.com/mdekok/mdk-di-sourcegenerator) package.
+The package includes a reflection-based strategy to register services using these attributes. However, if you prefer a source generator strategy, you can use the [Mdk.DISourceGenerator](https://www.nuget.org/packages/Mdk.DISourceGenerator/) package.
 - Installation: The package is available on NuGet as [Mdk.DIAttributes](https://www.nuget.org/packages/Mdk.DIAttributes/).
 - Attribute Usage: The package provides attributes like AddScoped, AddSingleton, and AddTransient for different lifetimes. You can use these attributes on your classes to register them with the DI container. For example, ```[AddScoped] class MyClass { ... }``` is equivalent to ```services.AddScoped<MyClass>();```.
 - Registration using Reflection: The attributes need to be translated to actual registrations in the DI container. This can be done using reflection. The reflection method involves iterating over assemblies, types, and attributes of the application domain. However, this method has some downsides.
-- Registration using a Source Generator: The [Mdk.DISourceGenerator](https://github.com/mdekok/mdk-di-sourcegenerator) package provides a source generator that translates the attributes to registration code for the default DI container. This solves the issues associated with the reflection strategy.
+- Registration using a Source Generator: The [Mdk.DISourceGenerator](https://www.nuget.org/packages/Mdk.DISourceGenerator/) package provides a source generator that translates the attributes to registration code for the default DI container. This solves the issues associated with the reflection strategy.
 	
 # DIAttributes
 If you have a lot of services registered in the default DI container, your registration code can become some sort of a mess.
@@ -19,7 +21,7 @@ All that is left is a method call for translating the attributes to actual regis
 
 This package includes a reflection code strategy to register services using attributes.
 If you want a source generator as a better alternative strategy,
-go to: [Mdk.DISourceGenerator](https://github.com/mdekok/mdk-di-sourcegenerator)
+go to: [Mdk.DISourceGenerator](https://www.nuget.org/packages/Mdk.DISourceGenerator/)
 
 - [Installation](#installation)
 - [Attribute usage](#attribute-usage)
@@ -38,12 +40,12 @@ Following examples focus on scoped registration. Use AddSingleton or AddTransien
 [AddScoped]
 class MyClass { ... }
 ```
-equals to ```services.AddScoped<MyClass>();```
+corresponds to ```services.AddScoped<MyClass>();```
 ```
 [AddScoped<IMyInterface>]
 class MyClass: IMyInterface { ... }
 ```
-equals to ```services.AddScoped<IMyInterface, MyClass>();```
+corresponds to ```services.AddScoped<IMyInterface, MyClass>();```
 
 Generic attributes require C# 11. If you are still on a earlier version use ```[AddScoped(typeof(IMyInterface))]```
 
@@ -53,7 +55,7 @@ Generic attributes require C# 11. If you are still on a earlier version use ```[
 [AddScoped<IMyInterface2>]
 class MyClass: IMyInterface1, IMyInterface2 { ... }
 ```
-equals to
+corresponds to
 ```
 services.AddScoped<IMyInterface1, MyClass>();
 services.AddScoped<IMyInterface2, MyClass>();
@@ -65,24 +67,24 @@ services.AddScoped<IMyInterface2, MyClass>();
 [AddScoped]
 class MyClass<T> { ... }
 ```
-equals to ```services.AddScoped(typeof(MyClass<>));```
+corresponds to ```services.AddScoped(typeof(MyClass<>));```
 ```
 [AddScoped(typeof(IMyInterface<>))]
 class MyClass<T>: IMyInterface<T> { ... }
 ```
-equals to ```services.AddScoped(typeof(IMyInterface<>), typeof(MyClass<>));```
+corresponds to ```services.AddScoped(typeof(IMyInterface<>), typeof(MyClass<>));```
 
 #### Bound generic registration:
 ```
 [AddScoped<MyClass<int>>]
 class MyClass<T> { ... }
 ```
-equals to ```services.AddScoped<MyClass<int>>();```
+corresponds to ```services.AddScoped<MyClass<int>>();```
 ```
 [AddScoped<IMyInterface<int>>]
 class MyClass<T>: IMyInterface<T> { ... }
 ```
-equals to ```services.AddScoped<IMyInterface<int>, MyClass<int>>();```
+corresponds to ```services.AddScoped<IMyInterface<int>, MyClass<int>>();```
 
 #### Multiple generic type parameters
 Multiple generic type parameters are also supported, for example:
@@ -90,13 +92,13 @@ Multiple generic type parameters are also supported, for example:
 [AddScoped]
 class MyClass<T, U> { ... }
 ```
-equals to ```services.AddScoped(typeof(MyClass<,>));```
+corresponds to ```services.AddScoped(typeof(MyClass<,>));```
 
 ## Attribute to registration translation
 The assigned attributes need to be translated to actual registrations in the default DI container.
 
 ### Using reflection
-A common way to query for attributes at run time is using reflection.
+A common way to query for attributes at runtime is using reflection.
 
 Following extension method iterates over assemblies, types and attributes of the application domain,
 but this does NOT always work:
@@ -128,7 +130,7 @@ public static IServiceCollection RegisterByAttributes<T>(this IServiceCollection
     foreach (Type type in assembly.GetTypes())
         foreach (DIAttribute attribute in type.GetCustomAttributes<DIAttribute>(false))
         {
-            ... Register service based on attribute found.
+            // Register service based on attribute found.
         }
 
     return services;
@@ -149,7 +151,7 @@ public static class DependencyInjections
 internal sealed class BusinessLogicServices { }
 ```
 
-In the examples section of this repository a Blazor application and a Minimal API project are added,
+The examples section of the [GitHub repository](https://github.com/mdekok/mdk-di-attributes) contain a Blazor application and a Minimal API project,
 in which this registration strategy is implemented.
 
 A solution using reflection is not ideal because:
