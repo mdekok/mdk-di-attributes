@@ -1,5 +1,5 @@
 [![Build](https://github.com/mdekok/mdk-di-attributes/actions/workflows/Build.yml/badge.svg)](https://github.com/mdekok/mdk-di-attributes/actions/workflows/Build.yml)
-[![Build, pack and publish](https://github.com/mdekok/mdk-di-attributes/actions/workflows/BuildPackPublish.yml/badge.svg)](https://github.com/mdekok/mdk-di-aIAttributes/actions/workflows/BuildPackPublish.yml)
+[![Build, pack and publish](https://github.com/mdekok/mdk-di-attributes/actions/workflows/BuildPackPublish.yml/badge.svg)](https://github.com/mdekok/mdk-di-attributes/actions/workflows/BuildPackPublish.yml)
 ![Nuget](https://img.shields.io/nuget/v/Mdk.DIAttributes)
 
 
