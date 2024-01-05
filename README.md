@@ -150,7 +150,7 @@ public static class DependencyInjections
 internal sealed class BusinessLogicServices { }
 ```
 
-The examples section of the [GitHub repository](https://github.com/mdekok/mdk-di-attributes) contain a Blazor application and a Minimal API project,
+The examples section of the [GitHub repository](https://github.com/mdekok/mdk-di-attributes) contains a Blazor application and a Minimal API project,
 in which this registration strategy is implemented.
 
 A solution using reflection is not ideal because:
