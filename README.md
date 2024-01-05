@@ -110,7 +110,7 @@ public static IServiceCollection RegisterByAttributes(this IServiceCollection se
         foreach (Type type in assembly.GetTypes())
             foreach (DIAttribute attribute in type.GetCustomAttributes<DIAttribute>(false))
             {
-                ... Register service based on attribute found.
+                // Register service based on attribute found.
             }
 
     return services;
