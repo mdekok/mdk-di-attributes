@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Mdk.DIAttributes" Version="1.0.0" />
+	  <ProjectReference Include="..\..\DIAttributes\Mdk.DIAttributes.csproj" />
 	</ItemGroup>
 
 </Project>
