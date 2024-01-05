@@ -1,6 +1,6 @@
 [![Build](https://github.com/mdekok/mdk-di-attributes/actions/workflows/Build.yml/badge.svg)](https://github.com/mdekok/mdk-di-attributes/actions/workflows/Build.yml)
 [![Build, pack and publish](https://github.com/mdekok/mdk-di-attributes/actions/workflows/BuildPackPublish.yml/badge.svg)](https://github.com/mdekok/mdk-di-attributes/actions/workflows/BuildPackPublish.yml)
-![Nuget](https://img.shields.io/nuget/v/Mdk.DIAttributes?link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FMdk.DIAttributes)
+[![Nuget](https://img.shields.io/nuget/v/Mdk.DIAttributes?logo=nuget)](https://www.nuget.org/packages/Mdk.DIAttributes)
 
 # Summary
 The DIAttributes package is designed to help clean up your service registration code when using the default Dependency Injection (DI) container in .NET. It allows you to use custom attributes to register your services, keeping the DI metadata close to the implementation classes.
