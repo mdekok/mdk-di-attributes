@@ -7,5 +7,5 @@ namespace Mdk.DIAttributes;
 public class AddHostedService<HostedServiceType> : Attribute
 {
     /// <summary>Gets the hosted service type registered.</summary>
-    public Type? ServiceType { get; } = typeof(HostedServiceType);
+    public Type? HostedServiceType { get; } = typeof(HostedServiceType);
 }
