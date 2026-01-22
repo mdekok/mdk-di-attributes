@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ public static class ServiceCollectionDIAttributeExtensions
             return services;
 
         foreach (Type type in assembly.GetTypes())
+        {
             foreach (DIAttribute attribute in type.GetCustomAttributes<DIAttribute>(false))
             {
                 // The implementation type is explicitly set or if not, the same as the attributed type.
@@ -40,6 +42,19 @@ public static class ServiceCollectionDIAttributeExtensions
 
                 services.Add(new ServiceDescriptor(serviceType, implementationType, attribute.ServiceLifetime));
             }
+
+            // Register hosted services.
+            if (type.GetCustomAttributes<AddHostedService>(false).Any())
+            {
+                if (!typeof(IHostedService).IsAssignableFrom(type))
+                {
+                    throw new InvalidOperationException(
+                        $"Type '{type.FullName}' is decorated with [AddHostedService] but does not implement IHostedService.");
+                }
+
+                services.Add(ServiceDescriptor.Singleton(typeof(IHostedService), type));
+            }
+        }
 
         AssembliesProcessed.Add(assembly);
 
