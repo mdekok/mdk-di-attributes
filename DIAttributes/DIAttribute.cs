@@ -11,11 +11,13 @@ public abstract class DIAttribute : Attribute
     /// <param name="serviceLifetime">The service lifetime: Singleton, Scoped or Transient.</param>
     /// <param name="serviceType">Service type to register, if null the type of the class decorated by the attribute is implied.</param>
     /// <param name="implementationType">Implementation type, if null the type of the class decorated by the attribute is implied.</param>
-    public DIAttribute(ServiceLifetime serviceLifetime, Type? serviceType = null, Type? implementationType = null)
+    /// <param name="key">Key for keyed services registration, if null no keyed registration is implied.</param>
+    public DIAttribute(ServiceLifetime serviceLifetime, Type? serviceType = null, Type? implementationType = null, string? key = null)
     {
-        ServiceLifetime = serviceLifetime;
-        ServiceType = serviceType;
-        ImplementationType = implementationType;
+        this.ServiceLifetime = serviceLifetime;
+        this.ServiceType = serviceType;
+        this.ImplementationType = implementationType;
+        this.Key = key;
     }
 
     /// <summary>Gets the lifetime of the instances created.</summary>
@@ -26,4 +28,7 @@ public abstract class DIAttribute : Attribute
 
     /// <summary>Gets the implementation type registered.</summary>
     public Type? ImplementationType { get; }
+
+    /// <summary>Gets the key registered.</summary>
+    public string? Key { get; }
 }

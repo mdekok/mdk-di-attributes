@@ -14,13 +14,11 @@ public class AddSingleton : DIAttribute
 }
 
 /// <inheritdoc />
-public class AddSingleton<ServiceType> : DIAttribute
-{
-    public AddSingleton() : base(ServiceLifetime.Singleton, typeof(ServiceType)) { }
-}
+public class AddSingleton<ServiceType>()
+    : DIAttribute(ServiceLifetime.Singleton, typeof(ServiceType))
+{ }
 
 /// <inheritdoc />
-public class AddSingleton<ServiceType, ImplementationType> : DIAttribute
-{
-    public AddSingleton() : base(ServiceLifetime.Singleton, typeof(ServiceType), typeof(ImplementationType)) { }
-}
+public class AddSingleton<ServiceType, ImplementationType>()
+    : DIAttribute(ServiceLifetime.Singleton, typeof(ServiceType), typeof(ImplementationType))
+{ }
