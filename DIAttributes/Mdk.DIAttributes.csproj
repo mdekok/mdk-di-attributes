@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<Version>1.2.0</Version>
+		<Version>1.3.0</Version>
 		<Authors>Michel de Kok</Authors>
 		<Company>Michel de Kok Software Engineering</Company>
 		<RepositoryUrl>https://github.com/mdekok/mdk-di-attributes</RepositoryUrl>
